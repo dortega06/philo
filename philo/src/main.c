@@ -6,7 +6,7 @@
 /*   By: dortega- <dortega-@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 19:19:19 by dortega-          #+#    #+#             */
-/*   Updated: 2026/01/03 19:03:13 by dortega-         ###   ########.fr       */
+/*   Updated: 2026/01/06 16:58:39 by dortega-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 int	main(int ac, char **av)
 {
 	t_table	table;
-	if (ac == 5 | ac == 6)
+	if (ac == 5 || ac == 6)
 	{
 		parse_input(&table, av);//error check, filling table table
-	//	data_init();// creando 
-	//	dinner_start();
+		data_init(&table);// creando 
+		dinner_start(&table);
 		//leaks
 	}
 	else
