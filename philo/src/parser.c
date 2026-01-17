@@ -6,11 +6,12 @@
 /*   By: dortega- <dortega-@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 17:59:53 by dortega-          #+#    #+#             */
-/*   Updated: 2026/01/03 19:05:26 by dortega-         ###   ########.fr       */
+/*   Updated: 2026/01/17 12:53:19 by dortega-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
+
 static int	ft_isspace(int c)
 {
 	return (c == '\t' || c == '\n' || c == '\v'
@@ -21,6 +22,7 @@ int	ft_isdigit(int c)
 {
 	return (c >= '0' && c <= '9');
 }
+
 const char *valid_input(const char *str)
 {
 	int	len;
@@ -32,14 +34,14 @@ const char *valid_input(const char *str)
 	if (*str == '+')
 		++str;
 	else if (*str == '-')
-		printf("error negativooo");
+		error_exit("negative numbers not allowed");
 	if (!ft_isdigit((int)*str))
-		printf("loco no es un digit");
+		error_exit("not a valid number");
 	nbr = str;
 	while (ft_isdigit(*str++))
 		++len;
 	if (len > 10)
-		printf("valor muy grande");
+		error_exit("value too large");
 	return (nbr);
 }
 
@@ -52,19 +54,19 @@ long int	ft_atol(const char *str)
 	while (ft_isdigit((int)*str))
 		nbr = (nbr * 10) + (*str++ - 48);
 	if (nbr > INT_MAX)
-		printf("NUMERO MUY GRANDE");
+		error_exit("number exceeds INT_MAX");
 	return (nbr);
 }
 
 void	parse_input(t_table *table, char **av)
 {
 	table->philo_nbr = ft_atol(av[1]);
-	table->time2die = ft_atol(av[2]) * 1e3;
-	table->time2eat = ft_atol(av[3]) * 1e3;
-	table->time2sleep = ft_atol(av[4]) * 1e3;
-	if (table->time2die < 6e4 || table->time2eat < 6e4
+	table->time2die = ft_atol(av[2]) * 1000;
+	table->time2eat = ft_atol(av[3]) * 1000;
+	table->time2sleep = ft_atol(av[4]) * 1000;
+/*	if (table->time2die < 6e4 || table->time2eat < 6e4
 		|| table->time2sleep < 6e4)
-		printf("usa un timestamps mayor de 60ms");
+		error_exit("use timestamps greater than 60ms");*/
 	if (av[5])
 		table->nbr_limits_meals = ft_atol(av[5]);
 	else
